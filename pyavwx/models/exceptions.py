@@ -9,6 +9,7 @@ class StationError:
     help: str
     timestamp: datetime
 
+
 @dataclass
 class AuthError:
     meta: dict
@@ -21,3 +22,15 @@ class AuthError:
         self.error = self.meta.get('validation_error')
 
 
+@dataclass
+class BadStatus:
+    error: str
+    code: str
+    timestamp: datetime
+
+    def __init__(self, error: str, code: str) -> None:
+        self.error = error
+        self.code = code
+
+    def __post_init__(self) -> None:
+        self.timestamp = datetime.now()
