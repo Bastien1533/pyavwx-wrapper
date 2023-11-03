@@ -1,8 +1,8 @@
 import requests
 import json
 
-from avwx_exceptions import AvwxBadStatus
-from avwx_authentication import AvwxApiAuth
+from pyavwx.avwx_exceptions import AvwxBadStatus
+from pyavwx.avwx_authentication import AvwxApiAuth
 
 
 def makeRequest(url: str, auth: AvwxApiAuth, rjson: bool) -> tuple:
