@@ -10,6 +10,6 @@ def makeRequest(url: str, auth: AvwxApiAuth, rjson: bool) -> tuple:
     if r.status_code != requests.codes.ok:
         raise AvwxBadStatus(request=r)
     if rjson:
-        return (r,)
-    else:
         return r, json.loads(r.text)
+    else:
+        return r, 
