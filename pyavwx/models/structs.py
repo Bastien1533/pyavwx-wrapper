@@ -50,6 +50,7 @@ class Dewpoint:
     spoken: str = None
 
 
+
 @dataclass
 class Meta:
     timestamp: datetime = None
@@ -82,7 +83,7 @@ class RemarksInfo:
 
 
 @dataclass
-class WindDirection:
+class Wind:
     repr: int = None
     value: int = None
     spoken: str = None
@@ -93,7 +94,7 @@ class RunwayVisibility:
     repr: str = None
     runway: int = None
     visibility: DewpointDecimal = None
-    variable_visibility: List[WindDirection] = None
+    variable_visibility: List[Wind] = None
     trend: WxCode = None
 
 
