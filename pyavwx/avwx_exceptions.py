@@ -13,7 +13,7 @@ class AvwxBadStatus(Exception):
 
         elif request.status_code == 401:
             self.exception = AuthError(**(json.loads(request.text)))
-            self.args = (self.status, self.exception, Metar(**self.exception.sample))
+            self.args = (self.status, self.exception, self.exception.sample)
 
         else:
             self.exception = BadStatus(error="Unknown Error", code=self.status)
