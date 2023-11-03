@@ -21,11 +21,11 @@ def nested_dataclass(*args, **kwargs):
     return wrapper(args[0]) if args else wrapper
 
 
-def url_builder(url_modifier: str, base_url: str, args: dict, main_payload: str) -> str:
+def url_builder(url_modifier: str, base_url: str, args: dict, main_payload: str, include_main: bool = True) -> str:
     # Building URL: 
     # To get something like that: metar?options=translate&format=json&remove=&filter=
     # We directly take the function args if they are provided, without self and url_modifier
-    url = base_url + url_modifier + f"{main_payload}?"
+    url = base_url + url_modifier + f"{main_payload if include_main else ''}?"
     if args.get("self"):
         del args["self"]
     if args.get("url_modifier"):
@@ -33,6 +33,6 @@ def url_builder(url_modifier: str, base_url: str, args: dict, main_payload: str)
 
     for arg in args:
         value = args.get(arg)
-        if value:
+        if value and value != main_payload:
             url = url + f'{arg}={str(value).replace(" ", "")}&'
     return url
