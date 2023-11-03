@@ -17,22 +17,23 @@ from pyavwx.models.structs import (
     Translate,
     Info
 )
+from pyavwx.models.utils import nested_dataclass
 
 
-@dataclass
+@nested_dataclass
 class Probability:
     repr: str = None
     value: int = None
     spoken: str = None
 
 
-@dataclass
+@nested_dataclass
 class WxCode:
     repr: str = None
     value: str = None
 
 
-@dataclass
+@nested_dataclass
 class Forecast:
     altimeter: str = None
     clouds: List[Cloud] = None
@@ -57,7 +58,7 @@ class Forecast:
     wind_gust: Optional[Wind] = None
 
 
-@dataclass
+@nested_dataclass
 class Taf:
     meta: Meta = None
     raw: str = None

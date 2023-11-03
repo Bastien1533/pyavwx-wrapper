@@ -2,6 +2,8 @@ from dataclasses import dataclass
 from typing import Optional, List, Any
 from datetime import datetime
 
+from pyavwx.models.utils import nested_dataclass
+
 
 @dataclass
 class Code:
@@ -64,7 +66,7 @@ class WxCode:
     value: str = None
 
 
-@dataclass
+@nested_dataclass
 class RemarksInfo:
     maximum_temperature_6: DewpointDecimal = None
     minimum_temperature_6: DewpointDecimal = None
@@ -89,7 +91,7 @@ class Wind:
     spoken: str = None
 
 
-@dataclass
+@nested_dataclass
 class RunwayVisibility:
     repr: str = None
     runway: int = None
@@ -98,7 +100,7 @@ class RunwayVisibility:
     trend: WxCode = None
 
 
-@dataclass
+@nested_dataclass
 class Time:
     repr: str = None
     dt: datetime = None
@@ -158,7 +160,7 @@ class Runway:
     bearing2: int = None
 
 
-@dataclass
+@nested_dataclass
 class Info:
     city: str = None
     country: str = None
