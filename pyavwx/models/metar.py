@@ -1,12 +1,13 @@
 from dataclasses import dataclass
 from typing import Optional, List, Any
 from datetime import datetime
+import  json
 
 from pyavwx.models.structs import (
     Altimeter,
     Cloud,
     Visibility,
-    WindDirection,
+    Wind,
     WxCode,
     Time,
     Dewpoint,
@@ -28,9 +29,9 @@ class Metar:
     flight_rules: str = None
     other: List[Any] = None
     visibility: Visibility = None
-    wind_direction: WindDirection = None
-    wind_gust: WindDirection = None
-    wind_speed: WindDirection = None
+    wind_direction: Wind = None
+    wind_gust: Wind = None
+    wind_speed: Wind = None
     wx_codes: List[WxCode] = None
     raw: str = None
     sanitized: str = None
@@ -50,3 +51,9 @@ class Metar:
     speech: str = None
     translate: Translate = None
     info: Info = None
+
+    def to_dict(self):
+        return self.__dict__
+
+    def to_json(self):
+        return json.dumps(self.__dict__)
