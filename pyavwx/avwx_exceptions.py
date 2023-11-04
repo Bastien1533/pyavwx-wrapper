@@ -11,7 +11,7 @@ class AvwxBadStatus(Exception):
         if request.status_code == 400:
             self.exception = StationError(**json.loads(request.text))
 
-        elif request.status_code == 401:
+        elif request.status_code == 401 or request.status_code == 403:
             self.exception = AuthError(**(json.loads(request.text)))
             self.args = (self.status, self.exception, self.exception.sample)
 
