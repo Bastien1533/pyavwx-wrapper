@@ -15,7 +15,7 @@ from pyavwx.models.structs import (
     Units,
     Meta,
     Translate,
-    Info
+    Info,
 )
 from pyavwx.models.utils import nested_dataclass
 
@@ -82,6 +82,3 @@ class Taf:
 
     def to_json(self):
         return json.dumps(self.__dict__)
-
-
-

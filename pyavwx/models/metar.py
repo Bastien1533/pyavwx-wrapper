@@ -16,7 +16,7 @@ from pyavwx.models.structs import (
     Units,
     Meta,
     Translate,
-    Info
+    Info,
 )
 from pyavwx.models.utils import nested_dataclass
 

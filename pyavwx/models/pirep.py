@@ -3,15 +3,8 @@ from dataclasses import dataclass
 from typing import Optional, List, Any
 from datetime import datetime
 
-from pyavwx.models.structs import (
-    Distance,
-    Altitude,
-    Units,
-    Meta,
-    Info
-)
+from pyavwx.models.structs import Distance, Altitude, Units, Meta, Info
 from pyavwx.models.utils import nested_dataclass
-
 
 
 @nested_dataclass

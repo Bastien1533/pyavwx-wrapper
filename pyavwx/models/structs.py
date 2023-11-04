@@ -11,7 +11,6 @@ class Code:
     value: str = None
 
 
-
 @dataclass
 class Precip36_Hours:
     repr: int = None
@@ -32,11 +31,13 @@ class Altimeter:
     value: float = None
     spoken: str = None
 
+
 @dataclass
 class Altitude:
     repr: int = None
     value: int = None
     spoken: str = None
+
 
 @dataclass
 class DewpointDecimal:
@@ -57,11 +58,13 @@ class Dewpoint:
     value: int = None
     spoken: str = None
 
+
 @dataclass
 class Distance:
     repr: str = None
     value: int = None
     spoken: str = None
+
 
 @dataclass
 class Meta:

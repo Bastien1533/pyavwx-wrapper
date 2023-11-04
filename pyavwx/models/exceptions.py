@@ -19,7 +19,7 @@ class AuthError:
 
     def __post_init__(self):
         self.timestamp = datetime.now()
-        self.error = self.meta.get('validation_error')
+        self.error = self.meta.get("validation_error")
 
 
 @dataclass

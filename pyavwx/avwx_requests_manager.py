@@ -5,10 +5,16 @@ from pyavwx.avwx_exceptions import AvwxBadStatus
 from pyavwx.avwx_authentication import AvwxApiAuth
 
 
-def makeRequest(url: str, auth: AvwxApiAuth, data: str = None, rjson: bool = True, method: str = 'GET') -> tuple:
-    if method == 'GET':
+def makeRequest(
+    url: str,
+    auth: AvwxApiAuth,
+    data: str = None,
+    rjson: bool = True,
+    method: str = "GET",
+) -> tuple:
+    if method == "GET":
         r = requests.get(url=url, auth=auth, data=data)
-    elif method == 'POST':
+    elif method == "POST":
         r = requests.post(url=url, auth=auth, data=data)
     else:
         raise AttributeError("Method incorrect : not 'POST' or 'GET'")
@@ -17,4 +23,4 @@ def makeRequest(url: str, auth: AvwxApiAuth, data: str = None, rjson: bool = Tru
     if rjson:
         return r, json.loads(r.text)
     else:
-        return r, 
+        return (r,)
