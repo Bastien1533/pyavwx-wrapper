@@ -3,53 +3,53 @@ from dataclasses import dataclass
 from typing import Optional, List, Any
 from datetime import datetime
 
-from pyavwx.models.structs import Distance, Altitude, Units, Meta, Info
+from pyavwx.models.structs import Distance, Altitude, Units, Meta, Info, Cloud
 from pyavwx.models.utils import nested_dataclass
 
 
 @nested_dataclass
 class Aircraft:
-    code: str
-    type: str
+    code: str = None
+    type: str = None
 
 
 @nested_dataclass
 class Location:
-    repr: str
+    repr: str = None
     station: Optional[str] = None
     distance: Optional[Distance] = None
 
 
 @nested_dataclass
 class Time:
-    repr: int
-    dt: datetime
+    repr: int = None
+    dt: datetime = None
 
 
 @nested_dataclass
 class Turbulance:
-    severity: str
-    floor: None
-    ceiling: None
+    severity: str = None
+    floor: Any = None
+    ceiling: Any = None
 
 
 @nested_dataclass
 class Datum:
-    raw: str
-    station: str
-    time: Time
-    aircraft: Aircraft
-    altitude: Altitude
-    clouds: None
-    flight_visibility: None
-    icing: None
-    location: Location
-    other: List[Any]
-    sanitized: str
-    temperature: None
-    turbulance: Turbulance
-    type: str
-    wx_codes: List[Any]
+    raw: str = None
+    station: str = None
+    time: Time = None
+    aircraft: Aircraft = None
+    altitude: Altitude = None
+    clouds: List[Cloud] = None
+    flight_visibility: Any = None
+    icing: Any = None
+    location: Location = None
+    other: List[Any] = None
+    sanitized: str = None
+    temperature: Any = None
+    turbulance: Turbulance = None
+    type: str = None
+    wx_codes: List[Any] = None
     remarks: Optional[str] = None
     info: Info = None
 
@@ -62,7 +62,10 @@ class Datum:
 
 @nested_dataclass
 class Pirep:
-    meta: Meta
-    data: List[Datum]
-    units: Units
-    timestamp: datetime
+    meta: Meta = None
+    data: List[Datum] = None
+    units: Units = None
+    timestamp: datetime = None
+    
+    
+    
