@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import Optional, List, Any
 from datetime import datetime
-import  json
+import json
 
 from pyavwx.models.structs import (
     Altimeter,
