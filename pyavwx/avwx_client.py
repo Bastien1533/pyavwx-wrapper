@@ -186,5 +186,3 @@ class AvwxApiClient:
         # And then cast the json response to the Metar Object.
         r = makeRequest(url=url, auth=self.auth, rjson=True, data=pirep, method="POST")
         return Pirep(**r[1])
-    
-    
