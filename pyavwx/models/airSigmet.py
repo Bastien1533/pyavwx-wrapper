@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import List, Any
+from typing import Any
 
 from pyavwx.models.structs import Units, Meta, Time, Remarks, Station
 
