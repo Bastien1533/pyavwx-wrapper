@@ -16,7 +16,7 @@ from pyavwx.models.structs import (
     Units,
     Meta,
     Translate,
-    Info,
+    Station,
 )
 from pyavwx.models.utils import nested_dataclass
 
@@ -25,14 +25,14 @@ from pyavwx.models.utils import nested_dataclass
 class Metar:
     meta: Meta = None
     altimeter: Altimeter = None
-    clouds: List[Cloud] = None
+    clouds: list[Cloud] = None
     flight_rules: str = None
-    other: List[Any] = None
+    other: list[Any] = None
     visibility: Visibility = None
     wind_direction: Wind = None
     wind_gust: Wind = None
     wind_speed: Wind = None
-    wx_codes: List[WxCode] = None
+    wx_codes: list[WxCode] = None
     raw: str = None
     sanitized: str = None
     station: str = None
@@ -41,16 +41,17 @@ class Metar:
     dewpoint: Dewpoint = None
     relative_humidity: float = None
     remarks_info: RemarksInfo = None
-    runway_visibility: List[RunwayVisibility] = None
+    runway_visibility: list[RunwayVisibility] = None
     temperature: Dewpoint = None
-    wind_variable_direction: List[Any] = None
+    wind_variable_direction: list[Any] = None
     density_altitude: int = None
     pressure_altitude: int = None
     units: Units = None
     summary: str = None
     speech: str = None
     translate: Translate = None
-    info: Info = None
+    info: Station = None
+    
 
     def to_dict(self):
         return self.__dict__

@@ -15,7 +15,7 @@ from pyavwx.models.structs import (
     Units,
     Meta,
     Translate,
-    Info,
+    Station,
 )
 from pyavwx.models.utils import nested_dataclass
 
@@ -75,7 +75,7 @@ class Taf:
     alts: str = None
     temps: str = None
     units: Units = None
-    info: Info = None
+    info: Station = None
 
     def to_dict(self):
         return self.__dict__

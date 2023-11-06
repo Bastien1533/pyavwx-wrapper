@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from typing import Optional, List, Any
 from datetime import datetime
 
-from pyavwx.models.structs import Distance, Altitude, Units, Meta, Info, Cloud
+from pyavwx.models.structs import Distance, Altitude, Units, Meta, Station, Cloud
 from pyavwx.models.utils import nested_dataclass
 
 
@@ -40,18 +40,18 @@ class Datum:
     time: Time = None
     aircraft: Aircraft = None
     altitude: Altitude = None
-    clouds: List[Cloud] = None
+    clouds: list[Cloud] = None
     flight_visibility: Any = None
     icing: Any = None
     location: Location = None
-    other: List[Any] = None
+    other: list[Any] = None
     sanitized: str = None
     temperature: Any = None
     turbulance: Turbulance = None
     type: str = None
-    wx_codes: List[Any] = None
+    wx_codes: list[Any] = None
     remarks: Optional[str] = None
-    info: Info = None
+    info: Station = None
 
     def to_dict(self):
         return self.__dict__
@@ -63,7 +63,7 @@ class Datum:
 @nested_dataclass
 class Pirep:
     meta: Meta = None
-    data: List[Datum] = None
+    data: list[Datum] = None
     units: Units = None
     timestamp: datetime = None
     

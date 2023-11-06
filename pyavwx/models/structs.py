@@ -5,6 +5,7 @@ from datetime import datetime
 from pyavwx.models.utils import nested_dataclass
 
 
+
 @dataclass
 class Code:
     repr: str = None
@@ -87,7 +88,7 @@ class RemarksInfo:
     precip_36__hours: DewpointDecimal = None
     precip_24__hours: DewpointDecimal = None
     sunshine_minutes: DewpointDecimal = None
-    codes: List[WxCode] = None
+    codes: list[WxCode] = None
     dewpoint_decimal: DewpointDecimal = None
     maximum_temperature_24: DewpointDecimal = None
     minimum_temperature_24: DewpointDecimal = None
@@ -109,7 +110,7 @@ class RunwayVisibility:
     repr: str = None
     runway: int = None
     visibility: DewpointDecimal = None
-    variable_visibility: List[Wind] = None
+    variable_visibility: list[Wind] = None
     trend: WxCode = None
 
 
@@ -174,7 +175,7 @@ class Runway:
 
 
 @nested_dataclass
-class Info:
+class Station:
     city: str = None
     country: str = None
     elevation_ft: int = None
@@ -183,13 +184,13 @@ class Info:
     iata: str = None
     icao: str = None
     latitude: float = None
-    local: Local = None
+    local: str = None
     longitude: float = None
     name: str = None
-    note: Local = None
+    note: str = None
     reporting: bool = None
-    runways: List[Runway] = None
+    runways: list[Runway] = None
     state: str = None
     type: str = None
-    website: Local = None
+    website: str = None
     wiki: str = None
