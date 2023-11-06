@@ -10,11 +10,11 @@ class AvwxApiClient:
         self.auth = AvwxApiAuth(api_key)
 
     def get_station(
-            self,
-            ident: str,
-            remove: str = None,
-            filter: str = None,
-            url_modifier: str = "station/",
+        self,
+        ident: str,
+        remove: str = None,
+        filter: str = None,
+        url_modifier: str = "station/",
     ) -> Station:
         args = locals()
         url = url_builder(
@@ -30,12 +30,12 @@ class AvwxApiClient:
         return Station(**r[1])
 
     def get_near_stations(
-            self,
-            coords: str,
-            n: int = 10,
-            remove: str = None,
-            filter: str = None,
-            url_modifier: str = "station/near/",
+        self,
+        coords: str,
+        n: int = 10,
+        remove: str = None,
+        filter: str = None,
+        url_modifier: str = "station/near/",
     ) -> list[NearStation]:
         args = locals()
         url = url_builder(

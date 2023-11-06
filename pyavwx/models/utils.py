@@ -22,9 +22,7 @@ def nested_dataclass(*args, **kwargs):
                 if type(value) == list:
                     # ⇩⇩⇩⇩⇩⇩⇩ https://koor.fr/Python/API/python/types/GenericAlias/Index.wp ⇩⇩⇩⇩⇩⇩⇩
                     list_type = field_type.__args__[0]
-                    new_obj = list(
-                        [list_type(**d) for d in value]
-                    )
+                    new_obj = list([list_type(**d) for d in value])
                     kwargs[name] = new_obj
             original_init(self, *args, **kwargs)
 
@@ -35,11 +33,11 @@ def nested_dataclass(*args, **kwargs):
 
 
 def url_builder(
-        url_modifier: str,
-        base_url: str,
-        args: dict,
-        main_payload: str,
-        include_main: bool = True,
+    url_modifier: str,
+    base_url: str,
+    args: dict,
+    main_payload: str,
+    include_main: bool = True,
 ) -> str:
     # Building URL:
     # To get something like that: metar?options=translate&format=json&remove=&filter=

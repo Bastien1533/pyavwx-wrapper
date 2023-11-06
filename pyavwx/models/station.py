@@ -4,10 +4,7 @@ from datetime import datetime
 from pyavwx.models.structs import Distance, Altitude, Units, Meta, Station, Cloud
 from pyavwx.models.utils import nested_dataclass
 
-from dataclasses import  dataclass
-
-
-
+from dataclasses import dataclass
 
 
 @nested_dataclass
