@@ -1,7 +1,6 @@
 import json
-from dataclasses import dataclass
-from typing import Optional, List, Any
 from datetime import datetime
+from typing import Optional, Any
 
 from pyavwx.models.structs import Distance, Altitude, Units, Meta, Station, Cloud
 from pyavwx.models.utils import nested_dataclass
@@ -66,6 +65,9 @@ class Pirep:
     data: list[Datum] = None
     units: Units = None
     timestamp: datetime = None
-    
-    
-    
+
+    def to_dict(self):
+        return self.__dict__
+
+    def to_json(self):
+        return json.dumps(self.__dict__)

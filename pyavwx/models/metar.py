@@ -1,7 +1,5 @@
-from dataclasses import dataclass
-from typing import Optional, List, Any
-from datetime import datetime
 import json
+from typing import Any
 
 from pyavwx.models.structs import (
     Altimeter,
@@ -51,7 +49,6 @@ class Metar:
     speech: str = None
     translate: Translate = None
     info: Station = None
-    
 
     def to_dict(self):
         return self.__dict__

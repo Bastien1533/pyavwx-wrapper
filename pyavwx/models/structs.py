@@ -1,9 +1,8 @@
+import json
 from dataclasses import dataclass
-from typing import Optional, List, Any
 from datetime import datetime
 
 from pyavwx.models.utils import nested_dataclass
-
 
 
 @dataclass
@@ -194,3 +193,13 @@ class Station:
     type: str = None
     website: str = None
     wiki: str = None
+    coordinate_distance: float = None
+    nautical_miles: float = None
+    miles: float = None
+    kilometers: float = None
+
+    def to_dict(self):
+        return self.__dict__
+
+    def to_json(self):
+        return json.dumps(self.__dict__)

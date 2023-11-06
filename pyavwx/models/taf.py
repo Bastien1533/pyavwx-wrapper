@@ -1,20 +1,13 @@
 import json
-from dataclasses import dataclass, asdict
 from typing import List, Any, Optional
 
 from pyavwx.models.structs import (
-    Altimeter,
     Cloud,
     Visibility,
     Wind,
-    WxCode,
     Time,
-    Dewpoint,
-    RemarksInfo,
-    RunwayVisibility,
     Units,
     Meta,
-    Translate,
     Station,
 )
 from pyavwx.models.utils import nested_dataclass
