@@ -1,10 +1,6 @@
-import json
-
-from typing import Optional
-
 from pyavwx.avwx_authentication import AvwxApiAuth
 from pyavwx.models.utils import url_builder
-from pyavwx.models import Metar, Taf, Pirep
+from pyavwx.models import Metar, Taf, Pirep, Station, NearStation
 from pyavwx.avwx_requests_manager import makeRequest
 from pyavwx.const import BASE_URL
 
@@ -12,6 +8,51 @@ from pyavwx.const import BASE_URL
 class AvwxApiClient:
     def __init__(self, api_key):
         self.auth = AvwxApiAuth(api_key)
+
+    def get_station(
+            self,
+            ident: str,
+            remove: str = None,
+            filter: str = None,
+            url_modifier: str = "station/",
+    ) -> Station:
+        args = locals()
+        url = url_builder(
+            url_modifier=url_modifier,
+            base_url=BASE_URL,
+            main_payload=args["ident"],
+            args=args,
+        )
+
+        # We Make the request, evaluate the status code
+        # And then cast the json response to the Metar Object.
+        r = makeRequest(url=url, auth=self.auth, rjson=True)
+        return Station(**r[1])
+
+    def get_near_stations(
+            self,
+            coords: str,
+            n: int = 10,
+            remove: str = None,
+            filter: str = None,
+            url_modifier: str = "station/near/",
+    ) -> list[NearStation]:
+        args = locals()
+        url = url_builder(
+            url_modifier=url_modifier,
+            base_url=BASE_URL,
+            main_payload=args["coords"],
+            args=args,
+        )
+
+        # We Make the request, evaluate the status code
+        # And then cast the json response to the Metar Object.
+        r = makeRequest(url=url, auth=self.auth, rjson=True)
+
+        station_list = []
+        for station in r[1]:
+            station_list.append(NearStation(**station))
+        return station_list
 
     def get_metar(
         self,
@@ -145,3 +186,5 @@ class AvwxApiClient:
         # And then cast the json response to the Metar Object.
         r = makeRequest(url=url, auth=self.auth, rjson=True, data=pirep, method="POST")
         return Pirep(**r[1])
+    
+    
