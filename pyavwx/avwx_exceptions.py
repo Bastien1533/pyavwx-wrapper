@@ -1,8 +1,8 @@
 import json
+
 import requests
 
 from pyavwx.models.exceptions import StationError, AuthError, BadStatus
-from pyavwx.models.metar import Metar
 
 
 class AvwxBadStatus(Exception):

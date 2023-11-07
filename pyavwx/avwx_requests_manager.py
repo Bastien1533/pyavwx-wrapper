@@ -1,8 +1,9 @@
-import requests
 import json
 
-from pyavwx.avwx_exceptions import AvwxBadStatus
+import requests
+
 from pyavwx.avwx_authentication import AvwxApiAuth
+from pyavwx.avwx_exceptions import AvwxBadStatus
 
 
 def makeRequest(
