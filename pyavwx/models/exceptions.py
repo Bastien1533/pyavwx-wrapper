@@ -13,7 +13,7 @@ class StationError:
 @dataclass
 class AuthError:
     meta: dict
-    sample: dict
+    sample: dict = None
     error: str = None
     timestamp: datetime = None
 
