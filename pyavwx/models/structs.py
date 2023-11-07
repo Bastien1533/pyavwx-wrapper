@@ -6,6 +6,27 @@ from pyavwx.models.utils import nested_dataclass
 
 
 @dataclass
+class Coord:
+    lat: float = None
+    lon: float = None
+    repr: str = None
+
+
+@dataclass
+class TypeClass:
+    repr: str = None
+    value: str = None
+
+
+@dataclass
+class Ceiling:
+    altitude: int = None
+    modifier: dict = None
+    repr: str = None
+    type: str = None
+
+
+@dataclass
 class Code:
     repr: str = None
     value: str = None

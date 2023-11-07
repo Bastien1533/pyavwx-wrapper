@@ -1,13 +1,7 @@
 from dataclasses import dataclass
 from typing import Any
 
-from pyavwx.models.structs import Units, Meta, Time, Remarks, Station
-
-
-@dataclass
-class TypeClass:
-    repr: str = None
-    value: str = None
+from pyavwx.models.structs import Units, Meta, Time, Remarks, Station, TypeClass, Coord
 
 
 @dataclass
@@ -23,13 +17,6 @@ class Ceiling:
     repr: str = None
     value: int = None
     spoken: str = None
-
-
-@dataclass
-class Coord:
-    lat: float = None
-    lon: float = None
-    repr: str = None
 
 
 @dataclass
