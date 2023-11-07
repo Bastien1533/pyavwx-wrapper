@@ -1,10 +1,7 @@
-import json
-from datetime import datetime
-
-from pyavwx.models.structs import Distance, Altitude, Units, Meta, Station, Cloud
-from pyavwx.models.utils import nested_dataclass
-
 from dataclasses import dataclass
+
+from pyavwx.models.structs import Meta, Station
+from pyavwx.models.utils import nested_dataclass
 
 
 @nested_dataclass
@@ -14,3 +11,17 @@ class NearStation:
     nautical_miles: float = None
     miles: float = None
     kilometers: float = None
+
+
+@dataclass
+class Route:
+    lat: float = None
+    lon: float = None
+    repr: str = None
+
+
+@nested_dataclass
+class StationRoute:
+    meta: Meta = None
+    route: list[Route] = None
+    results: list[Station] = None
