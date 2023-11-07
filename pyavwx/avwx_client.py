@@ -1,8 +1,18 @@
 from pyavwx.avwx_authentication import AvwxApiAuth
-from pyavwx.models.utils import url_builder
-from pyavwx.models import Metar, Taf, Pirep, Station, NearStation
 from pyavwx.avwx_requests_manager import makeRequest
 from pyavwx.const import BASE_URL
+from pyavwx.models import (
+    Metar,
+    Taf,
+    Pirep,
+    Station,
+    NearStation,
+    StationRoute,
+    Summary,
+    AirSigmet,
+    Notam,
+)
+from pyavwx.models.utils import url_builder
 
 
 class AvwxApiClient:
@@ -53,6 +63,72 @@ class AvwxApiClient:
         for station in r[1]:
             station_list.append(NearStation(**station))
         return station_list
+
+    def get_stations_text(
+        self,
+        text: str,
+        n: str = "10",
+        remove: str = None,
+        filter: str = None,
+        url_modifier: str = "search/station",
+    ) -> list[Station]:
+        args = locals()
+        url = url_builder(
+            url_modifier=url_modifier,
+            base_url=BASE_URL,
+            main_payload="",
+            args=args,
+        )
+        # We Make the request, evaluate the status code
+        # And then cast the json response to the Metar Object.
+        r = makeRequest(url=url, auth=self.auth, rjson=True)
+
+        station_list = []
+        for station in r[1]:
+            station_list.append(Station(**station))
+        return station_list
+
+    def get_stations_route(
+        self,
+        route: str,
+        distance: str,
+        remove: str = None,
+        filter: str = None,
+        url_modifier: str = "path/station",
+    ) -> StationRoute:
+        args = locals()
+        url = url_builder(
+            url_modifier=url_modifier,
+            base_url=BASE_URL,
+            main_payload="",
+            args=args,
+        )
+        # We Make the request, evaluate the status code
+        # And then cast the json response to the Metar Object.
+        r = makeRequest(url=url, auth=self.auth, rjson=True)
+
+        return StationRoute(**r[1])
+
+    def get_summary(
+        self,
+        location: str,
+        options: str = None,
+        remove: str = None,
+        filter: str = None,
+        onfail: str = None,
+        url_modifier: str = "summary/",
+    ) -> Summary:
+        args = locals()
+        url = url_builder(
+            url_modifier=url_modifier,
+            base_url=BASE_URL,
+            main_payload=args["location"],
+            args=args,
+        )
+        # We Make the request, evaluate the status code
+        # And then cast the json response to the Metar Object.
+        r = makeRequest(url=url, auth=self.auth, rjson=True)
+        return Summary(**r[1])
 
     def get_metar(
         self,
@@ -186,3 +262,90 @@ class AvwxApiClient:
         # And then cast the json response to the Metar Object.
         r = makeRequest(url=url, auth=self.auth, rjson=True, data=pirep, method="POST")
         return Pirep(**r[1])
+
+    def get_airsigmet(
+        self,
+        remove: str = None,
+        filter: str = None,
+        onfail: str = None,
+        url_modifier: str = "airsigmet",
+    ) -> AirSigmet:
+        args = locals()
+        url = url_builder(
+            url_modifier=url_modifier,
+            base_url=BASE_URL,
+            main_payload="",
+            args=args,
+        )
+
+        # We Make the request, evaluate the status code
+        # And then cast the json response to the Metar Object.
+        r = makeRequest(url=url, auth=self.auth, rjson=True)
+        return AirSigmet(**r[1])
+
+    def parse_airsigmet(
+        self,
+        airsigmet: str = None,
+        options: str = None,
+        remove: str = None,
+        filter: str = None,
+        url_modifier: str = "parse/airsigmet",
+    ) -> AirSigmet:
+        args = locals()
+        url = url_builder(
+            url_modifier=url_modifier,
+            base_url=BASE_URL,
+            main_payload=airsigmet,
+            include_main=False,
+            args=args,
+        )
+        # We Make the request, evaluate the status code
+        # And then cast the json response to the Metar Object.
+        r = makeRequest(
+            url=url, auth=self.auth, rjson=True, data=airsigmet, method="POST"
+        )
+        return AirSigmet(**r[1])
+
+    def get_notam(
+        self,
+        location: str,
+        distance: str = None,
+        remove: str = None,
+        filter: str = None,
+        onfail: str = "cache",
+        url_modifier: str = "notam/",
+    ) -> Notam:
+        args = locals()
+        url = url_builder(
+            url_modifier=url_modifier,
+            base_url=BASE_URL,
+            main_payload=location,
+            args=args,
+        )
+
+        # We Make the request, evaluate the status code
+        # And then cast the json response to the Metar Object.
+        r = makeRequest(url=url, auth=self.auth, rjson=True)
+        return Notam(**r[1])
+
+    def parse_notam(
+            self,
+            notam: str,
+            remove: str = None,
+            filter: str = None,
+            url_modifier: str = "parse/notam",
+    ) -> Notam:
+        args = locals()
+        url = url_builder(
+            url_modifier=url_modifier,
+            base_url=BASE_URL,
+            main_payload=notam,
+            include_main=False,
+            args=args,
+        )
+        # We Make the request, evaluate the status code
+        # And then cast the json response to the Metar Object.
+        r = makeRequest(
+            url=url, auth=self.auth, rjson=True, data=notam, method="POST"
+        )
+        return Notam(**r[1])
