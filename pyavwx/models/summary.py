@@ -1,3 +1,4 @@
+import json
 from datetime import datetime
 
 from pyavwx.models.metar import Translate
@@ -36,3 +37,9 @@ class Summary:
     speech: str = None
     translate: Translate = None
     info: Station = None
+
+    def to_dict(self):
+        return self.__dict__
+
+    def to_json(self):
+        return json.dumps(self.__dict__)

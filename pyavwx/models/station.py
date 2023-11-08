@@ -1,3 +1,4 @@
+import json
 from dataclasses import dataclass
 
 from pyavwx.models.structs import Meta, Station
@@ -12,6 +13,12 @@ class NearStation:
     miles: float = None
     kilometers: float = None
 
+    def to_dict(self):
+        return self.__dict__
+
+    def to_json(self):
+        return json.dumps(self.__dict__)
+
 
 @dataclass
 class Route:
@@ -25,3 +32,9 @@ class StationRoute:
     meta: Meta = None
     route: list[Route] = None
     results: list[Station] = None
+
+    def to_dict(self):
+        return self.__dict__
+
+    def to_json(self):
+        return json.dumps(self.__dict__)

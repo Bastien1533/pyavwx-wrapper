@@ -1,3 +1,4 @@
+import json
 from dataclasses import dataclass
 from datetime import datetime
 
@@ -62,3 +63,9 @@ class Datum:
 class Notam:
     meta: Meta
     data: list[Datum]
+
+    def to_dict(self):
+        return self.__dict__
+
+    def to_json(self):
+        return json.dumps(self.__dict__)
