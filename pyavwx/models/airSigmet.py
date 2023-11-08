@@ -1,5 +1,5 @@
+import json
 from dataclasses import dataclass
-from typing import Any
 
 from pyavwx.models.structs import Units, Meta, Time, Remarks, Station, TypeClass, Coord
 
@@ -22,15 +22,15 @@ class Ceiling:
 @dataclass
 class Observation:
     type: TypeClass = None
-    start_time: Any = None
-    end_time: Any = None
-    position: Any = None
+    start_time: any = None
+    end_time: any = None
+    position: any = None
     floor: Ceiling = None
     ceiling: Ceiling = None
     coords: list[Coord] = None
-    bounds: list[Any] = None
-    movement: Any = None
-    intensity: Any = None
+    bounds: list[any] = None
+    movement: any = None
+    intensity: any = None
     other: list[str] = None
 
 
@@ -43,7 +43,7 @@ class Report:
     remarks: Remarks = None
     bulletin: Bulletin = None
     issuer: str = None
-    correction: Any = None
+    correction: any = None
     area: str = None
     type: str = None
     start_time: Time = None
@@ -51,7 +51,7 @@ class Report:
     body: str = None
     region: str = None
     observation: Observation = None
-    forecast: Any = None
+    forecast: any = None
     units: Units = None
 
 
@@ -59,3 +59,9 @@ class Report:
 class AirSigmet:
     meta: Meta = None
     reports: list[Report] = None
+
+    def to_dict(self):
+        return self.__dict__
+
+    def to_json(self):
+        return json.dumps(self.__dict__)

@@ -11,6 +11,8 @@ from pyavwx.models import (
     Summary,
     AirSigmet,
     Notam,
+    Nbm,
+    Gfs
 )
 from pyavwx.models.utils import url_builder
 
@@ -91,7 +93,7 @@ class AvwxApiClient:
     def get_stations_route(
         self,
         route: str,
-        distance: str,
+        distance: int,
         remove: str = None,
         filter: str = None,
         url_modifier: str = "path/station",
@@ -193,6 +195,7 @@ class AvwxApiClient:
             main_payload=args["location"],
             args=args,
         )
+        print(url)
 
         # We Make the request, evaluate the status code
         # And then cast the json response to the Metar Object.
@@ -309,7 +312,7 @@ class AvwxApiClient:
     def get_notam(
         self,
         location: str,
-        distance: str = None,
+        distance: int = None,
         remove: str = None,
         filter: str = None,
         onfail: str = "cache",
@@ -329,11 +332,11 @@ class AvwxApiClient:
         return Notam(**r[1])
 
     def parse_notam(
-            self,
-            notam: str,
-            remove: str = None,
-            filter: str = None,
-            url_modifier: str = "parse/notam",
+        self,
+        notam: str,
+        remove: str = None,
+        filter: str = None,
+        url_modifier: str = "parse/notam",
     ) -> Notam:
         args = locals()
         url = url_builder(
@@ -345,7 +348,97 @@ class AvwxApiClient:
         )
         # We Make the request, evaluate the status code
         # And then cast the json response to the Metar Object.
-        r = makeRequest(
-            url=url, auth=self.auth, rjson=True, data=notam, method="POST"
-        )
+        r = makeRequest(url=url, auth=self.auth, rjson=True, data=notam, method="POST")
         return Notam(**r[1])
+
+    def get_nbm(
+        self,
+        report: str,
+        location: str,
+        options: str = None,
+        airport: bool = None,
+        reporting: bool = None,
+        remove: str = None,
+        filter: str = None,
+        onfail: str = "cache",
+        url_modifier: str = "nbm/",
+    ) -> Nbm:
+        args = locals()
+        url = url_builder(
+            url_modifier=f"{url_modifier}{report}/",
+            base_url=BASE_URL,
+            main_payload=location,
+            args=args,
+        )
+        # We Make the request, evaluate the status code
+        # And then cast the json response to the Metar Object.
+        r = makeRequest(url=url, auth=self.auth, rjson=True)
+        return Nbm(**r[1])
+
+    def parse_nbm(
+        self,
+        nbm: str,
+        report: str,
+        options: str,
+        remove: str = None,
+        filter: str = None,
+        url_modifier: str = "parse/nbm",
+    ) -> Nbm:
+        args = locals()
+        url = url_builder(
+            url_modifier=url_modifier,
+            base_url=BASE_URL,
+            main_payload=report,
+            include_main=True,
+            args=args,
+        )
+        # We Make the request, evaluate the status code
+        # And then cast the json response to the Metar Object.
+        r = makeRequest(url=url, auth=self.auth, rjson=True, data=nbm, method="POST")
+        return Nbm(**r[1])
+
+    def get_gfs(
+            self,
+            report: str,
+            location: str,
+            options: str = None,
+            airport: bool = None,
+            reporting: bool = None,
+            remove: str = None,
+            filter: str = None,
+            onfail: str = "cache",
+            url_modifier: str = "gfs/",
+    ) -> Gfs:
+        args = locals()
+        url = url_builder(
+            url_modifier=f"{url_modifier}{report}/",
+            base_url=BASE_URL,
+            main_payload=location,
+            args=args,
+        )
+        # We Make the request, evaluate the status code
+        # And then cast the json response to the Metar Object.
+        r = makeRequest(url=url, auth=self.auth, rjson=True)
+        return Gfs(**r[1])
+
+    def parse_gfs(
+            self,
+            gfs: str,
+            report: str,
+            options: str,
+            remove: str = None,
+            filter: str = None,
+            url_modifier: str = "parse/gfs",
+    ) -> Gfs:
+        args = locals()
+        url = url_builder(
+            url_modifier=url_modifier,
+            base_url=BASE_URL,
+            main_payload=report,
+            include_main=True,
+            args=args,
+        )
+        # We Make the request, evaluate the status code
+        # And then cast the json response to the Metar Object.
+        r = makeRequest(url=url, auth=self.auth, rjson=True, data=gfs, method="POST")
+        return Gfs(**r[1])
