@@ -1,6 +1,5 @@
 import json
 from datetime import datetime
-from typing import Optional, Any
 
 from pyavwx.models.structs import Distance, Altitude, Units, Meta, Station, Cloud
 from pyavwx.models.utils import nested_dataclass
@@ -15,8 +14,8 @@ class Aircraft:
 @nested_dataclass
 class Location:
     repr: str = None
-    station: Optional[str] = None
-    distance: Optional[Distance] = None
+    station: str = None
+    distance: Distance = None
 
 
 @nested_dataclass
@@ -28,8 +27,8 @@ class Time:
 @nested_dataclass
 class Turbulance:
     severity: str = None
-    floor: Any = None
-    ceiling: Any = None
+    floor: any = None
+    ceiling: any = None
 
 
 @nested_dataclass
@@ -40,16 +39,16 @@ class Datum:
     aircraft: Aircraft = None
     altitude: Altitude = None
     clouds: list[Cloud] = None
-    flight_visibility: Any = None
-    icing: Any = None
+    flight_visibility: any = None
+    icing: any = None
     location: Location = None
-    other: list[Any] = None
+    other: list[any] = None
     sanitized: str = None
-    temperature: Any = None
+    temperature: any = None
     turbulance: Turbulance = None
     type: str = None
-    wx_codes: list[Any] = None
-    remarks: Optional[str] = None
+    wx_codes: list[any] = None
+    remarks: str = None
     info: Station = None
 
     def to_dict(self):

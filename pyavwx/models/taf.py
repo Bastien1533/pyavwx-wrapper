@@ -1,4 +1,5 @@
 import json
+from dataclasses import dataclass
 from typing import List, Any, Optional
 
 from pyavwx.models.structs import (
@@ -13,14 +14,14 @@ from pyavwx.models.structs import (
 from pyavwx.models.utils import nested_dataclass
 
 
-@nested_dataclass
+@dataclass
 class Probability:
     repr: str = None
     value: int = None
     spoken: str = None
 
 
-@nested_dataclass
+@dataclass
 class WxCode:
     repr: str = None
     value: str = None
@@ -29,21 +30,21 @@ class WxCode:
 @nested_dataclass
 class Forecast:
     altimeter: str = None
-    clouds: List[Cloud] = None
+    clouds: list[Cloud] = None
     flight_rules: str = None
-    other: List[Any] = None
+    other: list[Any] = None
     sanitized: str = None
     visibility: Visibility = None
     wind_direction: Wind = None
     wind_speed: Wind = None
-    wx_codes: List[WxCode] = None
+    wx_codes: list[WxCode] = None
     end_time: Time = None
-    icing: List[Any] = None
+    icing: list[Any] = None
     probability: Probability = None
     raw: str = None
     start_time: Time = None
     transition_start: Time = None
-    turbulence: List[Any] = None
+    turbulence: list[Any] = None
     type: str = None
     wind_variable_direction: Wind = None
     wind_shear: Wind = None
