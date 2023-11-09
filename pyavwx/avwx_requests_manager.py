@@ -7,11 +7,11 @@ from pyavwx.avwx_exceptions import AvwxBadStatus
 
 
 def makeRequest(
-    url: str,
-    auth: AvwxApiAuth,
-    data: str = None,
-    rjson: bool = True,
-    method: str = "GET",
+        url: str,
+        auth: AvwxApiAuth,
+        data: str = None,
+        rjson: bool = True,
+        method: str = "GET",
 ) -> tuple:
     if method == "GET":
         r = requests.get(url=url, auth=auth, data=data)

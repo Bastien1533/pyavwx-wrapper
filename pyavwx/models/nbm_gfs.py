@@ -1,6 +1,5 @@
 import json
 from dataclasses import dataclass
-from datetime import datetime
 
 from pyavwx.models.structs import (
     Units,
@@ -10,7 +9,7 @@ from pyavwx.models.structs import (
     Ceiling,
     Cloud,
     Time,
-    Visibility
+    Visibility,
 )
 from pyavwx.models.utils import nested_dataclass
 
@@ -28,11 +27,11 @@ class PrecipAmount6:
     value: float = None
     spoken: str = None
 
+
 @dataclass
 class PrecipType:
     repr: str
     value: str
-
 
 
 @nested_dataclass
@@ -104,7 +103,7 @@ class Nbm:
 @nested_dataclass
 class Gfs:
     meta: Meta = None
-    raw: str = None 
+    raw: str = None
     station: str = None
     time: Time = None
     remarks: list[Remarks] = None
