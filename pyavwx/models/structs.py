@@ -61,16 +61,21 @@ class Altitude:
 
 
 @dataclass
-class DewpointDecimal:
-    pass
+class DecimalRepr:
+    repr: str = None
+    value: float = None
+    spoken: str = None
 
 
 @dataclass
 class Cloud:
     repr: str = None
     type: str = None
+    base: int = None
+    top: any = None
     altitude: int = None
-    modifier: DewpointDecimal = None
+    modifier: DecimalRepr = None
+    direction: any = None
 
 
 @dataclass
@@ -102,20 +107,20 @@ class WxCode:
 
 @nested_dataclass
 class RemarksInfo:
-    maximum_temperature_6: DewpointDecimal = None
-    minimum_temperature_6: DewpointDecimal = None
-    pressure_tendency: DewpointDecimal = None
-    precip_36__hours: DewpointDecimal = None
-    precip_24__hours: DewpointDecimal = None
-    sunshine_minutes: DewpointDecimal = None
+    maximum_temperature_6: DecimalRepr = None
+    minimum_temperature_6: DecimalRepr = None
+    pressure_tendency: DecimalRepr = None
+    precip_36__hours: DecimalRepr = None
+    precip_24__hours: DecimalRepr = None
+    sunshine_minutes: DecimalRepr = None
     codes: list[WxCode] = None
-    dewpoint_decimal: DewpointDecimal = None
-    maximum_temperature_24: DewpointDecimal = None
-    minimum_temperature_24: DewpointDecimal = None
-    precip_hourly: DewpointDecimal = None
+    dewpoint_decimal: DecimalRepr = None
+    maximum_temperature_24: DecimalRepr = None
+    minimum_temperature_24: DecimalRepr = None
+    precip_hourly: DecimalRepr = None
     sea_level_pressure: Altimeter = None
-    snow_depth: DewpointDecimal = None
-    temperature_decimal: DewpointDecimal = None
+    snow_depth: DecimalRepr = None
+    temperature_decimal: DecimalRepr = None
 
 
 @dataclass
@@ -129,7 +134,7 @@ class Wind:
 class RunwayVisibility:
     repr: str = None
     runway: int = None
-    visibility: DewpointDecimal = None
+    visibility: DecimalRepr = None
     variable_visibility: list[Wind] = None
     trend: WxCode = None
 
