@@ -1,5 +1,7 @@
 from dataclasses import dataclass, is_dataclass
 
+from pyavwx.const import GITHUB_URL
+
 
 # This function wrapper enable dataclass to have other dataclass as types
 # it casts the dict coresponding to the nested dataclass in the types dataclass
@@ -25,17 +27,25 @@ def nested_dataclass(*args, **kwargs):
                     kwargs[name] = new_obj
 
                 # if the value we want to cast in is a list of dict
-                if type(value) == list and len(value) != 0:
+                if type(value) == list and len(value) != 0 and field_type is not None:
                     # ⇩⇩⇩⇩⇩⇩⇩ https://koor.fr/Python/API/python/types/GenericAlias/Index.wp ⇩⇩⇩⇩⇩⇩⇩
+
                     list_type = field_type.__args__[0]
+                    print(list_type)
                     new_obj = list([list_type(**d) for d in value])
                     kwargs[name] = new_obj
-            original_init(self, *args, **kwargs)
+            try:
+                original_init(self, *args, **kwargs)
+            except TypeError as e:
+                print(
+                    f"Warning: {e}, This might be due to an undocumented aspect of the Api, Please report it at {GITHUB_URL}/issues"
+                )
 
         cls.__init__ = __init__
         return cls
 
     return wrapper(args[0]) if args else wrapper
+
 
 # A reusable url builder tailored for this wrapper
 def url_builder(
