@@ -1,0 +1,26 @@
+site_name: PyAvwx Wrapper Documentation
+
+theme:
+  name: "material"
+  icon:
+    repo: fontawesome/brands/github
+  
+plugins:
+  - git-revision-date-localized:
+      enable_creation_date: true
+      type: date
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            docstring_style: sphinx
+            
+repo_url: https://github.com/Bastien1533/pyavwx-wrapper
+repo_name: Bastien1533/pyavwx-wrapper
+edit_uri: edit/main/docs/
+  
+
+
+nav:
+  - Home Page: index.md
+  - Client reference: client.md
