@@ -1,5 +1,5 @@
 from dataclasses import dataclass, is_dataclass
-
+import typing
 from pyavwx.const import GITHUB_URL
 
 
@@ -31,8 +31,9 @@ def nested_dataclass(*args, **kwargs):
                     # ⇩⇩⇩⇩⇩⇩⇩ https://koor.fr/Python/API/python/types/GenericAlias/Index.wp ⇩⇩⇩⇩⇩⇩⇩
 
                     list_type = field_type.__args__[0]
-                    new_obj = list([list_type(**d) for d in value])
-                    kwargs[name] = new_obj
+                    if list_type != typing.Any:
+                        new_obj = list([list_type(**d) for d in value])
+                        kwargs[name] = new_obj
             try:
                 original_init(self, *args, **kwargs)
             except TypeError as e:
