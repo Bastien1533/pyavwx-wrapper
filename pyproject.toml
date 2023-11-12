@@ -117,7 +117,7 @@ dependencies = [ # Optional
 [project.urls]  # Optional
 "Homepage" = "https://github.com/Bastien1533/pyavwx-wrapper"
 "Bug Reports" = "https://github.com/Bastien1533/pyavwx-wrapper/issues"
-"Documentation" = "https://bastien1533.github.io/pyavwx-wrapper/
+"Documentation" = "https://bastien1533.github.io/pyavwx-wrapper/"
 "Say Thanks!" = "https://github.com/Bastien1533/pyavwx-wrapper"
 "Source" = "https://github.com/Bastien1533/pyavwx-wrapper"
 
