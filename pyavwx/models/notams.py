@@ -47,6 +47,7 @@ class Datum:
     sanitized: str = None
     station: str = None
     time: Time = None
+    remarks: str = None
     number: str = None
     replaces: None = None
     type: TypeClass = None
@@ -61,8 +62,8 @@ class Datum:
 
 @nested_dataclass
 class Notam:
-    meta: Meta
-    data: list[Datum]
+    meta: Meta = None
+    data: list[Datum] = None
 
     def to_dict(self):
         return self.__dict__

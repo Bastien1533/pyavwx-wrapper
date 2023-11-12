@@ -186,3 +186,5 @@ fabric.properties
 
 tests/*
 !tests/.gitkeep 
+!tests/current_tests.py
+!tests/__init__.py
