@@ -10,6 +10,7 @@ from pyavwx.models.structs import (
     Units,
     Meta,
     Station,
+    Altimeter
 )
 from pyavwx.models.utils import nested_dataclass
 
@@ -29,7 +30,7 @@ class WxCode:
 
 @nested_dataclass
 class Forecast:
-    altimeter: str = None
+    altimeter: Altimeter = None
     clouds: list[Cloud] = None
     flight_rules: str = None
     other: list[Any] = None
@@ -46,10 +47,15 @@ class Forecast:
     transition_start: Time = None
     turbulence: list[Any] = None
     type: str = None
+    sanitized_type: str = None
     wind_variable_direction: Wind = None
     wind_shear: Wind = None
     summary: str = None
-    wind_gust: Optional[Wind] = None
+    wind_gust: Wind = None
+
+    def __post_init__(self):
+        self.sanitized_type = self.type.replace('BECMG', 'Becoming From').replace('FROM', 'From').replace('TEMPO',
+                                                                                                          f'Temporary From {self.start_time.dt} to {self.end_time.dt}"')
 
 
 @nested_dataclass
@@ -66,8 +72,8 @@ class Taf:
     end_time: Time = None
     max_temp: str = None
     min_temp: str = None
-    alts: str = None
-    temps: str = None
+    alts: any = None
+    temps: any = None
     units: Units = None
     info: Station = None
 
