@@ -76,6 +76,8 @@ class Taf:
     temps: any = None
     units: Units = None
     info: Station = None
+    is_amended: bool = False
+    is_correction: bool = False
 
     def to_dict(self):
         return self.__dict__
