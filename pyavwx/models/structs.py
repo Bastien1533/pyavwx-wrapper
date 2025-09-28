@@ -228,4 +228,4 @@ class Station:
         return self.__dict__
 
     def to_json(self):
-        return json.dumps(self.__dict__)
+        return json.dumps(self.__dict__, default=lambda k: k.__dict__)
